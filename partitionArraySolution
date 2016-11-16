@@ -1,0 +1,30 @@
+public class Solution {
+	/** 
+     *@param nums: The integer array you should partition
+     *@param k: As description
+     *return: The index after partition
+     */
+    public int partitionArray(int[] nums, int k) {
+	    
+	    int e = nums.length-1;
+	    int i = 0;
+	    int j = e;
+	    int res = 0;
+	    while(i < j){
+	        while (i < j && nums[i] < k){    //防止无限循环导致下标越界
+	            i++;
+	        }
+	        while (i < j && nums[j] >= k){
+	            j--;
+	        }
+	        int temp = nums[i];
+	        nums[i] = nums[j];
+	        nums[j] = temp;
+	    }
+	    
+	    for (res = 0; res <= e; res++){
+	        if(nums[res] >= k) break;
+	    }
+	    return res;
+    }
+}
