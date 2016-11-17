@@ -1,0 +1,36 @@
+public class Solution {
+    /**
+     * @param numbers : Give an array numbers of n integer
+     * @return : Find all unique triplets in the array which gives the sum of zero.
+     */
+    public ArrayList<ArrayList<Integer>> threeSum(int[] numbers) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        
+        Arrays.sort(numbers);   //有序数组才能保证下面算法的正确性
+        
+        int i,j,k;              //三层循环的指针下标
+        int N = numbers.length;
+        
+        for(i = 0; i < N; i++){
+            if(numbers[i] > 0) break;        //若某个数字大于0，则表明之后的数字全部大于0，不必再计算
+            int temp1 = numbers[i];
+            for(j = i+1; j < N;j++){
+                if(numbers[j] + temp1 > 0) break;   //若两个数字之和大于0，则后续的数字都是大于0的，同上
+                int temp2 = numbers[j];
+                for(k = j+1; k < N; k++){
+                    if(numbers[k] > 0 - temp1 - temp2) break;   //同上
+                    int temp3 = numbers[k];
+                    if(temp3 + temp1 + temp2 == 0){
+                        ArrayList<Integer> temp = new ArrayList<Integer>();    //lintcode网站需要的提交格式
+                        temp.add(temp1);               //数组的有序保证了三元组的有序
+                        temp.add(temp2);
+                        temp.add(temp3);
+                        if(!res.contains(temp))       //结果中不能重复
+                            res.add(temp);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+}
