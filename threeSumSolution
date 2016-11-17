@@ -21,7 +21,7 @@ public class Solution {
                     if(numbers[k] > 0 - temp1 - temp2) break;   //同上
                     int temp3 = numbers[k];
                     if(temp3 + temp1 + temp2 == 0){
-                        ArrayList<Integer> temp = new ArrayList<Integer>();    //lintcode网站需要的提交格式
+                        ArrayList<Integer> temp = new ArrayList<Integer>();    //lintcode网站需要的提交格式，注意一开始我是定义了全局的temp，然后每次记录一个三元组，用完以后clear，但是java中的ArrayList的add方法是引用，对temp的更改同样会影响最后的结果，希望后来者谨记
                         temp.add(temp1);               //数组的有序保证了三元组的有序
                         temp.add(temp2);
                         temp.add(temp3);
