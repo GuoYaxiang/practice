@@ -16,9 +16,13 @@ public class Solution {
         int N = numbers.length;
         
         for(i = 0; i < N-2; i++){           //遍历所有和
-            int temp1 = numbers[i];
+            int temp1 = numbers[i];         //将反复使用的数字保存为局部变量，减少多次访问数组的时间消耗
+//           if(temp1 > target && target > 0) break;
             for(j = i+1; j < N-1; j++){
                 int temp2 = numbers[j];
+//                if(temp1 + temp2 > target && target > 0) break;   
+                /*加了判断以后，时间反而更长，问题在于每一次的遍历都需要进行这一行的判断，
+                对于很多情况而言这个判断并不能跳出循环，变成了多余的操作导致了时间更长。*/
                 for(k = j+1; k < N; k++){
                     int sumTemp = temp1 + temp2 + numbers[k];
                     int temp = Math.abs(sumTemp - target);
