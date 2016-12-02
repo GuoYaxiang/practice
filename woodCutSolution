@@ -38,3 +38,13 @@ public class Solution {
         return num;
     }
 }
+
+/*如果把二分部分改成下面这样会出现错误，因为最佳的长度对应的不一定正好是k段
+        while(up >= down){
+            int len = down + (up - down)/2;
+            if(len == 0) return 0;
+            int c = count(L,len);
+            if(c < k) up = len - 1;
+            else{ if(c == k) res = res>=len?res:len; down = len + 1;}
+        }    
+*/
