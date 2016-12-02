@@ -1,0 +1,40 @@
+public class Solution {
+    /** 
+     *@param L: Given n pieces of wood with length L[i]
+     *@param k: An integer
+     *return: The maximum length of the small pieces.
+     */
+    public int woodCut(int[] L, int k) {
+        
+        int l = L.length;
+        
+        if(l == 0) return 0;     //如果输入数组L为空则直接返回0
+        
+        int maxL = L[0];               //找到数组中的最大值
+        for(int i = 1; i < l; i++){
+            int temp = L[i];
+            if(temp > maxL){
+                maxL = temp;
+            }
+        }
+        int up = maxL;
+        int down = 0;
+        int res = 0;
+        
+        while(up >= down){               //二分法查找
+            int len = down + (up - down)/2;
+            if(len == 0) return 0;
+            int c = count(L,len);
+            if(c >= k) {res = res>=len?res:len;down = len + 1;}   //符号是>=
+            else if(c < k) up = len - 1;
+        }
+        return res;
+    }
+    public int count(int[] L,int length){
+        int num = 0;
+        for(int l:L){
+            num += l/length;
+        }
+        return num;
+    }
+}
