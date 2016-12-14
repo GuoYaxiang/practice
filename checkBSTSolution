@@ -1,0 +1,20 @@
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: True if the binary tree is BST, or false
+     */
+    int min = Integer.MIN_VALUE;
+    int max = Integer.MAX_VALUE;
+    public boolean isValidBST(TreeNode root){
+        return isValid(root, min, max, true, true);
+    }
+    
+    //minFlag和maxFlag分别用来指示当前出现的MAX_VALUE是来自初始化还是树结构自身
+    public boolean isValid(TreeNode root, int min, int max, boolean minFlag, boolean maxFlag) {
+        if(root == null) return true;
+        if((root.val > min && root.val < max) || (maxFlag == true && root.val == max) || (minFlag == true && root.val == min)){
+            return isValid(root.left,min,root.val,minFlag,false) && isValid(root.right,root.val,max,false,maxFlag);
+        }
+        return false;
+    }
+}
