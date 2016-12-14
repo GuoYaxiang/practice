@@ -18,3 +18,24 @@ public class Solution {
         return false;
     }
 }
+
+//解法二，我之前尝试过但是出错了，原因在于我当时形参部分写的是int min 和 int max ，不能接受null作为参数
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: True if the binary tree is BST, or false
+     */
+    public boolean isValidBST(TreeNode root) {
+            return isValid(root,null,null);
+    }
+    public boolean isValid(TreeNode root,Integer minVal,Integer maxVal){
+        if(root == null) 
+            return true;
+        if((minVal == null ||root.val> minVal) && (maxVal ==null ||root.val< maxVal)){
+            return isValid(root.left,minVal,root.val)
+                && isValid(root.right,root.val,maxVal);
+        }
+        return false;
+    }
+    
+}
